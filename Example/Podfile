@@ -1,0 +1,11 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'LKMediaManager', :exclusive => true do
+  pod "LKMediaManager", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "LKMediaManager", :path => "../"
+
+  
+end
