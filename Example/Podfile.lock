@@ -1,0 +1,14 @@
+PODS:
+  - LKMediaManager (0.1.0)
+
+DEPENDENCIES:
+  - LKMediaManager (from `../`)
+
+EXTERNAL SOURCES:
+  LKMediaManager:
+    :path: ../
+
+SPEC CHECKSUMS:
+  LKMediaManager: 1b490b3149e817dbe1d1ac4b051ed4acf412f0ab
+
+COCOAPODS: 0.37.1

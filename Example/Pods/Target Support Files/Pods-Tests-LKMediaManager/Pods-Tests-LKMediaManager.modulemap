@@ -1,0 +1,6 @@
+framework module LKMediaManager {
+  umbrella header "Pods-Tests-LKMediaManager-umbrella.h"
+
+  export *
+  module * { export * }
+}
