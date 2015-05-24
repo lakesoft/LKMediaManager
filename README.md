@@ -1,4 +1,5 @@
 # LKMediaManager
+<<<<<<< HEAD
 
 [![CI Status](http://img.shields.io/travis/Hiroshi Hashiguchi/LKMediaManager.svg?style=flat)](https://travis-ci.org/Hiroshi Hashiguchi/LKMediaManager)
 [![Version](https://img.shields.io/cocoapods/v/LKMediaManager.svg?style=flat)](http://cocoapods.org/pods/LKMediaManager)
@@ -27,3 +28,5 @@ Hiroshi Hashiguchi, xcatsan@mac.com
 ## License
 
 LKMediaManager is available under the MIT license. See the LICENSE file for more info.
+=======
+>>>>>>> 22a7cbfaafda490c8c3e0beaaf4468c6bc55343f
