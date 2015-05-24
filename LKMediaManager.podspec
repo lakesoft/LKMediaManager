@@ -10,18 +10,15 @@
 Pod::Spec.new do |s|
   s.name             = "LKMediaManager"
   s.version          = "0.1.0"
-  s.summary          = "A short description of LKMediaManager."
+  s.summary          = "Easy library for handling image/video file"
   s.description      = <<-DESC
-                       An optional longer description of LKMediaManager
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+  LKMediaManager is useful short lib for image/video.
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/LKMediaManager"
+  s.homepage         = "https://github.com/lakesoft/LKMediaManager"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
-  s.author           = { "Hiroshi Hashiguchi" => "xcatsan@mac.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/LKMediaManager.git", :tag => s.version.to_s }
+  s.author           = { "Hiroshi Hashiguchi" => "hashiguchi@lakesoft.jp" }
+  s.source           = { :git => "https://github.com/lakesoft/LKMediaManager.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '8.3'
