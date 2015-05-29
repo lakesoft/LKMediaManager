@@ -12,9 +12,9 @@ import AVFoundation
 import MobileCoreServices
 import ImageIO
 
-class LKMediaManager: NSObject {
+public class LKMediaManager: NSObject {
     
-    enum MediaType: String {
+    public enum MediaType: String {
         case BIN = "application/octet-stream"
         case JPEG = "image/jpeg"
         case PNG = "image/png"
@@ -22,8 +22,15 @@ class LKMediaManager: NSObject {
         case MOV = "video/quicktime"
     }
     
+    public static let sharedManager = LKMediaManager()
+    
+    override init() {
+        super.init()
+        self.setup()
+    }
+    
     // MARK: Properties
-    var mediaPath:String {
+    public var mediaPath:String {
         get {
             let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
             return dir.stringByAppendingPathComponent("LKMediaManager")
@@ -32,7 +39,7 @@ class LKMediaManager: NSObject {
    
     
     // MARK: - API (Media)
-    func restoreData(filename:String) -> NSData? {
+    public func restoreData(filename:String) -> NSData? {
         let filePath = mediaPath.stringByAppendingPathComponent(filename)
         if let data = NSData(contentsOfFile:filePath) {
             return data
@@ -40,12 +47,12 @@ class LKMediaManager: NSObject {
         return nil
     }
     
-    func removeMedia(filename:String) -> Bool {
+    public func removeMedia(filename:String) -> Bool {
         let filePath = mediaPath.stringByAppendingPathComponent(filename)
         return removeFile(filePath)
     }
     
-    func mediaSize(filename:String) -> Int {
+    public func mediaSize(filename:String) -> Int {
         let filePath = mediaPath.stringByAppendingPathComponent(filename)
         var error: NSErrorPointer = nil
         if let attr:NSDictionary = NSFileManager.defaultManager().attributesOfItemAtPath(filePath, error: error) {
@@ -58,7 +65,7 @@ class LKMediaManager: NSObject {
         return 0
     }
 
-    func mimeType(filename:String) -> String {
+    public func mimeType(filename:String) -> String {
         var mimeType = MediaType.BIN
         let ext = filename.pathExtension.lowercaseString
         
@@ -76,14 +83,14 @@ class LKMediaManager: NSObject {
     }
     
     // MARK: -  API (Media/Image)
-    func restoreImage(filename:String) -> UIImage? {
+    public func restoreImage(filename:String) -> UIImage? {
         if let data = restoreData(filename) {
             return UIImage(data:data)
         }
         return nil
     }
     
-    func saveImage(image:UIImage, metadata:Dictionary<String,String>, quality:CGFloat, filename:String) -> Bool {
+    public func saveImage(image:UIImage, metadata:Dictionary<String,String>, quality:CGFloat, filename:String) -> Bool {
         let filePath = mediaPath.stringByAppendingPathComponent(filename)
         let data = convertImageToData(image, metadata: metadata, quality: quality)
         if data.writeToFile(filePath, atomically: true) {
@@ -95,7 +102,7 @@ class LKMediaManager: NSObject {
     }
     
     // MARK: -  API (Media/Video)
-    func saveVideo(url:NSURL, filename:String) -> Bool {
+    public func saveVideo(url:NSURL, filename:String) -> Bool {
         let filePath = mediaPath.stringByAppendingPathComponent(filename)
         let videoPath = url.path
         let fm = NSFileManager.defaultManager()
@@ -116,7 +123,7 @@ class LKMediaManager: NSObject {
         }
     }
     
-    func videoThumbnail(filePath:String, width:CGFloat) -> UIImage? {
+    public func videoThumbnail(filePath:String, width:CGFloat) -> UIImage? {
         // gen thumbnail
         // http://stackoverflow.com/questions/5719135/uiimagepickercontroller-thumbnail-of-video-which-is-pick-up-from-library
 
