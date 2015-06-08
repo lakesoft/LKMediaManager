@@ -52,7 +52,7 @@ public class LKMediaManager: NSObject {
         return removeFile(filePath)
     }
     
-    public func mediaSize(filename:String) -> Int {
+    public func mediaSize(filename:String) -> UInt64 {
         let filePath = mediaPath.stringByAppendingPathComponent(filename)
         var error: NSErrorPointer = nil
         if let attr:NSDictionary = NSFileManager.defaultManager().attributesOfItemAtPath(filePath, error: error) {
@@ -60,7 +60,7 @@ public class LKMediaManager: NSObject {
                 NSLog("[ERROR] failed to get size (%@) : %@", filePath, error.memory!.description)
                 return 0
             }
-            return Int(attr.fileSize())
+            return UInt64(attr.fileSize())
         }
         return 0
     }
@@ -123,11 +123,10 @@ public class LKMediaManager: NSObject {
         }
     }
     
-    public func videoThumbnail(filePath:String, width:CGFloat) -> UIImage? {
+    public func videoThumbnail(url:NSURL, width:CGFloat) -> UIImage? {
         // gen thumbnail
         // http://stackoverflow.com/questions/5719135/uiimagepickercontroller-thumbnail-of-video-which-is-pick-up-from-library
 
-        let url = NSURL(fileURLWithPath: filePath)
         let asset = AVURLAsset(URL: url, options: nil)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         imageGenerator.appliesPreferredTrackTransform = true
@@ -137,8 +136,8 @@ public class LKMediaManager: NSObject {
         
         let imageRef = imageGenerator.copyCGImageAtTime(time, actualTime:&actualTime, error:error)
         
-        if error.memory != nil {
-            NSLog("[ERROR] failed to create a thumbnail image (%@) : %@", filePath, error.memory!.description)
+        if error != nil {
+            NSLog("[ERROR] failed to create a thumbnail image (%@) : %@", url, error.memory!.description)
             return nil
         } else {
             if let image = UIImage(CGImage: imageRef) {
