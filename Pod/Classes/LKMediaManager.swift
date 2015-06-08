@@ -54,10 +54,10 @@ public class LKMediaManager: NSObject {
     
     public func mediaSize(filename:String) -> UInt64 {
         let filePath = mediaPath.stringByAppendingPathComponent(filename)
-        var error: NSErrorPointer = nil
-        if let attr:NSDictionary = NSFileManager.defaultManager().attributesOfItemAtPath(filePath, error: error) {
-            if error.memory != nil {
-                NSLog("[ERROR] failed to get size (%@) : %@", filePath, error.memory!.description)
+        var error: NSError?
+        if let attr:NSDictionary = NSFileManager.defaultManager().attributesOfItemAtPath(filePath, error: &error) {
+            if error != nil {
+                NSLog("[ERROR] failed to get size (%@) : %@", filePath, error!.description)
                 return 0
             }
             return UInt64(attr.fileSize())
@@ -108,17 +108,17 @@ public class LKMediaManager: NSObject {
         let fm = NSFileManager.defaultManager()
         
         if fm.fileExistsAtPath(filePath) {
-            var error: NSErrorPointer = nil
-            if !fm.removeItemAtPath(filePath, error: error) {
-                NSLog("[ERROR] failed to remove the video file (%@) : %@", filePath, error.memory!.description)
+            var error: NSError?
+            if !fm.removeItemAtPath(filePath, error: &error) {
+                NSLog("[ERROR] failed to remove the video file (%@) : %@", filePath, error!.description)
             }
         }
         
-        var error: NSErrorPointer = nil
-        if fm.copyItemAtPath(videoPath!, toPath: filePath, error: error) {
+        var error: NSError?
+        if fm.copyItemAtPath(videoPath!, toPath: filePath, error: &error) {
             return true
         } else {
-            NSLog("[ERROR] failed to save the video file (%@) : %@", filePath, error.memory!.description);
+            NSLog("[ERROR] failed to save the video file (%@) : %@", filePath, error!.description);
             return false
         }
     }
@@ -131,13 +131,13 @@ public class LKMediaManager: NSObject {
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         imageGenerator.appliesPreferredTrackTransform = true
         let time = CMTimeMakeWithSeconds(0.0, 600)
-        var error: NSErrorPointer = nil
+        var error: NSError?
         var actualTime:CMTime = CMTimeMake(0, 0)
         
-        let imageRef = imageGenerator.copyCGImageAtTime(time, actualTime:&actualTime, error:error)
+        let imageRef = imageGenerator.copyCGImageAtTime(time, actualTime:&actualTime, error:&error)
         
         if error != nil {
-            NSLog("[ERROR] failed to create a thumbnail image (%@) : %@", url, error.memory!.description)
+            NSLog("[ERROR] failed to create a thumbnail image (%@) : %@", url, error!.description)
             return nil
         } else {
             if let image = UIImage(CGImage: imageRef) {
@@ -152,10 +152,10 @@ public class LKMediaManager: NSObject {
         var result = true
         let fm = NSFileManager.defaultManager()
         if !fm.fileExistsAtPath(path) {
-            var error: NSErrorPointer = nil
-            result = fm.createDirectoryAtPath(path, withIntermediateDirectories: false, attributes: nil, error: error)
+            var error: NSError?
+            result = fm.createDirectoryAtPath(path, withIntermediateDirectories: false, attributes: nil, error: &error)
             if !result {
-                NSLog("[ERROR] %@", error.memory!.description);
+                NSLog("[ERROR] %@", error!.description);
             }
         }
         return result;
@@ -165,10 +165,10 @@ public class LKMediaManager: NSObject {
         var result = true
         let fm = NSFileManager.defaultManager()
         if fm.fileExistsAtPath(filePath) {
-            var error: NSErrorPointer = nil
-            result = fm.removeItemAtPath(filePath, error: error)
+            var error: NSError?
+            result = fm.removeItemAtPath(filePath, error: &error)
             if !result {
-                NSLog("[ERROR] %@", error.memory!.description);
+                NSLog("[ERROR] %@", error!.description);
             }
         }
         return result
