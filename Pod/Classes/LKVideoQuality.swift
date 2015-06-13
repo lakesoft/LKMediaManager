@@ -90,6 +90,13 @@ public class LKVideoQuality: NSObject {
         return 0
     }
     
+    public static func defaultTypeName() -> String {
+        if let typeName = typeName(defaultIndex()) {
+            return typeName
+        }
+        return ""
+    }
+    
     public static func saveIndex(index:Int) {
         if let qualityType = qualityType(index) {
             saveDefaultQualityType(qualityType)
