@@ -1,20 +1,25 @@
 {
   "name": "LKMediaManager",
-  "version": "0.1.0",
-  "summary": "A short description of LKMediaManager.",
-  "description": "                       An optional longer description of LKMediaManager\n\n                       * Markdown format.\n                       * Don't worry about the indent, we strip it!\n",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/LKMediaManager",
+  "version": "0.1.4",
+  "summary": "Easy library for handling image/video file",
+  "description": "  LKMediaManager is useful short lib for image/video.\n",
+  "homepage": "https://github.com/lakesoft/LKMediaManager",
   "license": "MIT",
   "authors": {
-    "Hiroshi Hashiguchi": "xcatsan@mac.com"
+    "Hiroshi Hashiguchi": "hashiguchi@lakesoft.jp"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/LKMediaManager.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/lakesoft/LKMediaManager.git",
+    "tag": "0.1.4"
   },
   "platforms": {
     "ios": "8.3"
   },
   "requires_arc": true,
-  "source_files": "Pod/Classes/**/*"
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "LKMediaManager": [
+      "Pod/Assets/*.*"
+    ]
+  }
 }

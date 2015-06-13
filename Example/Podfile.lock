@@ -1,5 +1,5 @@
 PODS:
-  - LKMediaManager (0.1.0)
+  - LKMediaManager (0.1.4)
 
 DEPENDENCIES:
   - LKMediaManager (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  LKMediaManager: 1b490b3149e817dbe1d1ac4b051ed4acf412f0ab
+  LKMediaManager: 42d7c1f7acb0d9ec3ae6155f8b715540e4a1f5f6
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.37.2

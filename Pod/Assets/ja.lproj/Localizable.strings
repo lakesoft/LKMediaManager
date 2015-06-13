@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  Pods
+
+  Created by Hiroshi Hashiguchi on 2015/06/13.
+
+*/
+"VideoQuality.High" = "高品質";
+"VideoQuality.Medium" = "中品質";
+"VideoQuality.Low" = "低品質";
+"VideoQuality.640x480" = "640x480";
+"VideoQuality.IFrame960x540" = "960x540";
+"VideoQuality.IFrame1280x720" = "1280x720";
