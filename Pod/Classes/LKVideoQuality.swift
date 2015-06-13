@@ -30,8 +30,9 @@ public class LKVideoQuality: NSObject {
     ]
     
     public static var titles:[String] {
+        let bundle = NSBundle(path:NSBundle(forClass: LKVideoQuality.self).pathForResource("LKMediaManager", ofType: "bundle")!)!
         return list.map { (q:Quality) -> String in
-            return NSLocalizedString(q.localizedStringKey, comment: "")
+            return NSLocalizedString(q.localizedStringKey, bundle:bundle, comment: "")
         }
     }
     
