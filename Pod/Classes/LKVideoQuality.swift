@@ -29,13 +29,26 @@ public class LKVideoQuality: NSObject {
         Quality(type:UIImagePickerControllerQualityType.TypeIFrame1280x720, localizedStringKey:"VideoQuality.IFrame1280x720"),
     ]
     
-    public static var titles:[String] {
-        let bundle = NSBundle(path:NSBundle(forClass: LKVideoQuality.self).pathForResource("LKMediaManager", ofType: "bundle")!)!
+    static let bundle = NSBundle(path:NSBundle(forClass: LKVideoQuality.self).pathForResource("LKMediaManager", ofType: "bundle")!)!
+
+    
+    public static var title:String {
+        return NSLocalizedString("VideoQuality.title", bundle:bundle, comment: "")
+    }
+    
+    public static var typeNames:[String] {
         return list.map { (q:Quality) -> String in
-            return NSLocalizedString(q.localizedStringKey, bundle:bundle, comment: "")
+            return NSLocalizedString(q.localizedStringKey, bundle:self.bundle, comment: "")
         }
     }
     
+    public static func typeName(index:Int) -> String? {
+        if index < list.count {
+            return NSLocalizedString(list[index].localizedStringKey, bundle:bundle, comment: "")
+        }
+        return nil
+    }
+
     public static func index(qualityType:UIImagePickerControllerQualityType) -> Int? {
         for (index, quality) in enumerate(list) {
             if quality.type == qualityType {

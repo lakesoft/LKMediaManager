@@ -5,6 +5,7 @@
   Created by Hiroshi Hashiguchi on 2015/06/13.
 
 */
+"VideoQuality.title" = "ビデオ品質";
 "VideoQuality.High" = "高品質";
 "VideoQuality.Medium" = "中品質";
 "VideoQuality.Low" = "低品質";
