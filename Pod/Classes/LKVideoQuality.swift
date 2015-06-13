@@ -31,6 +31,7 @@ public class LKVideoQuality: NSObject {
     
     static let bundle = NSBundle(path:NSBundle(forClass: LKVideoQuality.self).pathForResource("LKMediaManager", ofType: "bundle")!)!
 
+    public static let DefaultQualityType = UIImagePickerControllerQualityType.Type640x480
     
     public static var title:String {
         return NSLocalizedString("VideoQuality.title", bundle:bundle, comment: "")
@@ -63,5 +64,35 @@ public class LKVideoQuality: NSObject {
             return list[index].type
         }
         return nil
+    }
+    
+    public static let userDefaultsKey = "LKVideoQuality.qualityType"
+    public static func defaultQualityType() -> UIImagePickerControllerQualityType {
+        if let value = NSUserDefaults.standardUserDefaults().objectForKey(userDefaultsKey) as?Int {
+            if let qualityType = UIImagePickerControllerQualityType(rawValue: value) {
+                return qualityType
+            }
+        }
+        return DefaultQualityType
+    }
+    public static func saveDefaultQualityType(qualityType:UIImagePickerControllerQualityType) {
+        NSUserDefaults.standardUserDefaults().setObject(qualityType.rawValue, forKey: userDefaultsKey)
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
+
+    public static func defaultIndex() -> Int {
+        if let index = index(defaultQualityType()) {
+            return index
+        }
+        if let index = index(DefaultQualityType) {
+            return index
+        }
+        return 0
+    }
+    
+    public static func saveIndex(index:Int) {
+        if let qualityType = qualityType(index) {
+            saveDefaultQualityType(qualityType)
+        }
     }
 }
