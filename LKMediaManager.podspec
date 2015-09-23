@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "LKMediaManager"
-  s.version          = "0.2.0"
+  s.version          = "0.2.1"
   s.summary          = "Easy library for handling image/video file"
   s.description      = <<-DESC
   LKMediaManager is useful short lib for image/video.
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/lakesoft/LKMediaManager.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.platform     = :ios, '8.3'
+  s.platform     = :ios, '9.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
