@@ -12,6 +12,16 @@ import AVFoundation
 import MobileCoreServices
 import ImageIO
 
+extension String {
+    func stringByAppendingPathComponent(path: String) -> String {
+        return (self as NSString).stringByAppendingPathComponent(path)
+    }
+    var pathExtension: String {
+        return (self as NSString).pathExtension
+    }
+}
+
+
 public class LKMediaManager: NSObject {
     
     public enum MediaType: String {
@@ -32,7 +42,7 @@ public class LKMediaManager: NSObject {
     // MARK: Properties
     public var mediaPath:String {
         get {
-            let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
+            let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
             return dir.stringByAppendingPathComponent("LKMediaManager")
         }
     }
@@ -55,12 +65,15 @@ public class LKMediaManager: NSObject {
     public func mediaSize(filename:String) -> UInt64 {
         let filePath = mediaPath.stringByAppendingPathComponent(filename)
         var error: NSError?
-        if let attr:NSDictionary = NSFileManager.defaultManager().attributesOfItemAtPath(filePath, error: &error) {
+        do {
+            let attr:NSDictionary = try NSFileManager.defaultManager().attributesOfItemAtPath(filePath)
             if error != nil {
                 NSLog("[ERROR] failed to get size (%@) : %@", filePath, error!.description)
                 return 0
             }
             return UInt64(attr.fileSize())
+        } catch let error1 as NSError {
+            error = error1
         }
         return 0
     }
@@ -109,15 +122,20 @@ public class LKMediaManager: NSObject {
         
         if fm.fileExistsAtPath(filePath) {
             var error: NSError?
-            if !fm.removeItemAtPath(filePath, error: &error) {
+            do {
+                try fm.removeItemAtPath(filePath)
+            } catch let error1 as NSError {
+                error = error1
                 NSLog("[ERROR] failed to remove the video file (%@) : %@", filePath, error!.description)
             }
         }
         
         var error: NSError?
-        if fm.copyItemAtPath(videoPath!, toPath: filePath, error: &error) {
+        do {
+            try fm.copyItemAtPath(videoPath!, toPath: filePath)
             return true
-        } else {
+        } catch let error1 as NSError {
+            error = error1
             NSLog("[ERROR] failed to save the video file (%@) : %@", filePath, error!.description);
             return false
         }
@@ -134,16 +152,20 @@ public class LKMediaManager: NSObject {
         var error: NSError?
         var actualTime:CMTime = CMTimeMake(0, 0)
         
-        let imageRef = imageGenerator.copyCGImageAtTime(time, actualTime:&actualTime, error:&error)
+        let imageRef: CGImage!
+        do {
+            imageRef = try imageGenerator.copyCGImageAtTime(time, actualTime:&actualTime)
+        } catch let error1 as NSError {
+            error = error1
+            imageRef = nil
+        }
         
         if error != nil {
             NSLog("[ERROR] failed to create a thumbnail image (%@) : %@", url, error!.description)
             return nil
         } else {
-            if let image = UIImage(CGImage: imageRef) {
-                return adjustOrientationImage(image, toWidth:width)
-            }
-            return nil
+            let image = UIImage(CGImage: imageRef)
+            return adjustOrientationImage(image, toWidth:width)
         }
     }
     
@@ -153,7 +175,13 @@ public class LKMediaManager: NSObject {
         let fm = NSFileManager.defaultManager()
         if !fm.fileExistsAtPath(path) {
             var error: NSError?
-            result = fm.createDirectoryAtPath(path, withIntermediateDirectories: false, attributes: nil, error: &error)
+            do {
+                try fm.createDirectoryAtPath(path, withIntermediateDirectories: false, attributes: nil)
+                result = true
+            } catch let error1 as NSError {
+                error = error1
+                result = false
+            }
             if !result {
                 NSLog("[ERROR] %@", error!.description);
             }
@@ -166,7 +194,13 @@ public class LKMediaManager: NSObject {
         let fm = NSFileManager.defaultManager()
         if fm.fileExistsAtPath(filePath) {
             var error: NSError?
-            result = fm.removeItemAtPath(filePath, error: &error)
+            do {
+                try fm.removeItemAtPath(filePath)
+                result = true
+            } catch let error1 as NSError {
+                error = error1
+                result = false
+            }
             if !result {
                 NSLog("[ERROR] %@", error!.description);
             }
@@ -179,13 +213,13 @@ public class LKMediaManager: NSObject {
     }
     
     func convertImageToData(image:UIImage, metadata:Dictionary<String,String>, quality:CGFloat) -> NSData {
-        var imageData = NSMutableData()
+        let imageData = NSMutableData()
         let dest = CGImageDestinationCreateWithData(imageData as CFMutableDataRef, kUTTypeJPEG, 1, nil)
 
-        CGImageDestinationSetProperties(dest, [kCGImageDestinationLossyCompressionQuality as String:quality])
+        CGImageDestinationSetProperties(dest!, [kCGImageDestinationLossyCompressionQuality as String:quality])
     
-        CGImageDestinationAddImage(dest, image.CGImage, metadata as CFDictionaryRef);
-        CGImageDestinationFinalize(dest);
+        CGImageDestinationAddImage(dest!, image.CGImage!, metadata as CFDictionaryRef);
+        CGImageDestinationFinalize(dest!);
         
         return imageData
     }
@@ -269,8 +303,6 @@ public class LKMediaManager: NSObject {
             transform = CGAffineTransformRotate(transform, CGFloat(M_PI) / 2.0)
             break
             
-        default:
-            break
         }
 
         UIGraphicsBeginImageContext(bounds.size)

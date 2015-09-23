@@ -51,7 +51,7 @@ public class LKVideoQuality: NSObject {
     }
 
     public static func index(qualityType:UIImagePickerControllerQualityType) -> Int? {
-        for (index, quality) in enumerate(list) {
+        for (index, quality) in list.enumerate() {
             if quality.type == qualityType {
                 return index
             }
