@@ -13,8 +13,8 @@ import MobileCoreServices
 import ImageIO
 
 extension String {
-    func stringByAppendingPathComponent(path: String) -> String {
-        return (self as NSString).stringByAppendingPathComponent(path)
+    func stringByAppendingPathComponent(_ path: String) -> String {
+        return (self as NSString).appendingPathComponent(path)
     }
     var pathExtension: String {
         return (self as NSString).pathExtension
@@ -22,7 +22,7 @@ extension String {
 }
 
 
-public class LKMediaManager: NSObject {
+open class LKMediaManager: NSObject {
     
     public enum MediaType: String {
         case BIN = "application/octet-stream"
@@ -32,7 +32,7 @@ public class LKMediaManager: NSObject {
         case MOV = "video/quicktime"
     }
     
-    public static let sharedManager = LKMediaManager()
+    open static let sharedManager = LKMediaManager()
     
     override init() {
         super.init()
@@ -40,33 +40,33 @@ public class LKMediaManager: NSObject {
     }
     
     // MARK: Properties
-    public var mediaPath:String {
+    open var mediaPath:String {
         get {
-            let dir = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
+            let dir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
             return dir.stringByAppendingPathComponent("LKMediaManager")
         }
     }
    
     
     // MARK: - API (Media)
-    public func restoreData(filename:String) -> NSData? {
+    open func restoreData(_ filename:String) -> Data? {
         let filePath = mediaPath.stringByAppendingPathComponent(filename)
-        if let data = NSData(contentsOfFile:filePath) {
+        if let data = try? Data(contentsOf: URL(fileURLWithPath: filePath)) {
             return data
         }
         return nil
     }
     
-    public func removeMedia(filename:String) -> Bool {
+    open func removeMedia(_ filename:String) -> Bool {
         let filePath = mediaPath.stringByAppendingPathComponent(filename)
         return removeFile(filePath)
     }
     
-    public func mediaSize(filename:String) -> UInt64 {
+    open func mediaSize(_ filename:String) -> UInt64 {
         let filePath = mediaPath.stringByAppendingPathComponent(filename)
         var error: NSError?
         do {
-            let attr:NSDictionary = try NSFileManager.defaultManager().attributesOfItemAtPath(filePath)
+            let attr:NSDictionary = try FileManager.default.attributesOfItem(atPath: filePath) as NSDictionary
             if error != nil {
                 NSLog("[ERROR] failed to get size (%@) : %@", filePath, error!.description)
                 return 0
@@ -78,17 +78,17 @@ public class LKMediaManager: NSObject {
         return 0
     }
 
-    public func mimeType(filename:String) -> String {
+    open func mimeType(_ filename:String) -> String {
         var mimeType = MediaType.BIN
-        let ext = filename.pathExtension.lowercaseString
+        let ext = filename.pathExtension.lowercased()
         
-        if ["jpeg", "jpg"].containsObject(ext) {
+        if ["jpeg", "jpg"].contains(ext) {
             mimeType = .JPEG
-        } else if ["png"].containsObject(ext) {
+        } else if ["png"].contains(ext) {
             mimeType = .PNG
-        } else if ["gif"].containsObject(ext) {
+        } else if ["gif"].contains(ext) {
             mimeType = .GIF
-        } else if ["mov"].containsObject(ext) {
+        } else if ["mov"].contains(ext) {
             mimeType = .MOV
         }
         
@@ -96,17 +96,17 @@ public class LKMediaManager: NSObject {
     }
     
     // MARK: -  API (Media/Image)
-    public func restoreImage(filename:String) -> UIImage? {
+    open func restoreImage(_ filename:String) -> UIImage? {
         if let data = restoreData(filename) {
             return UIImage(data:data)
         }
         return nil
     }
     
-    public func saveImage(image:UIImage, metadata:Dictionary<String,String>, quality:CGFloat, filename:String) -> Bool {
+    open func saveImage(_ image:UIImage, metadata:Dictionary<String,String>, quality:CGFloat, filename:String) -> Bool {
         let filePath = mediaPath.stringByAppendingPathComponent(filename)
         let data = convertImageToData(image, metadata: metadata, quality: quality)
-        if data.writeToFile(filePath, atomically: true) {
+        if (try? data.write(to: URL(fileURLWithPath: filePath), options: [.atomic])) != nil {
             return true
         } else {
             NSLog("failed to save: %@", filename)
@@ -115,15 +115,15 @@ public class LKMediaManager: NSObject {
     }
     
     // MARK: -  API (Media/Video)
-    public func saveVideo(url:NSURL, filename:String) -> Bool {
+    open func saveVideo(_ url:URL, filename:String) -> Bool {
         let filePath = mediaPath.stringByAppendingPathComponent(filename)
         let videoPath = url.path
-        let fm = NSFileManager.defaultManager()
+        let fm = FileManager.default
         
-        if fm.fileExistsAtPath(filePath) {
+        if fm.fileExists(atPath: filePath) {
             var error: NSError?
             do {
-                try fm.removeItemAtPath(filePath)
+                try fm.removeItem(atPath: filePath)
             } catch let error1 as NSError {
                 error = error1
                 NSLog("[ERROR] failed to remove the video file (%@) : %@", filePath, error!.description)
@@ -132,7 +132,7 @@ public class LKMediaManager: NSObject {
         
         var error: NSError?
         do {
-            try fm.copyItemAtPath(videoPath!, toPath: filePath)
+            try fm.copyItem(atPath: videoPath, toPath: filePath)
             return true
         } catch let error1 as NSError {
             error = error1
@@ -141,11 +141,11 @@ public class LKMediaManager: NSObject {
         }
     }
     
-    public func videoThumbnail(url:NSURL, width:CGFloat) -> UIImage? {
+    open func videoThumbnail(_ url:URL, width:CGFloat) -> UIImage? {
         // gen thumbnail
         // http://stackoverflow.com/questions/5719135/uiimagepickercontroller-thumbnail-of-video-which-is-pick-up-from-library
 
-        let asset = AVURLAsset(URL: url, options: nil)
+        let asset = AVURLAsset(url: url, options: nil)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         imageGenerator.appliesPreferredTrackTransform = true
         let time = CMTimeMakeWithSeconds(0.0, 600)
@@ -154,29 +154,29 @@ public class LKMediaManager: NSObject {
         
         let imageRef: CGImage!
         do {
-            imageRef = try imageGenerator.copyCGImageAtTime(time, actualTime:&actualTime)
+            imageRef = try imageGenerator.copyCGImage(at: time, actualTime:&actualTime)
         } catch let error1 as NSError {
             error = error1
             imageRef = nil
         }
         
         if error != nil {
-            NSLog("[ERROR] failed to create a thumbnail image (%@) : %@", url, error!.description)
+            print("[ERROR] failed to create a thumbnail image (%@) : %@", url, error!.description)
             return nil
         } else {
-            let image = UIImage(CGImage: imageRef)
+            let image = UIImage(cgImage: imageRef)
             return adjustOrientationImage(image, toWidth:width)
         }
     }
     
     // MARK: - Privates
-    func createDirectory(path:String) -> Bool {
+    func createDirectory(_ path:String) -> Bool {
         var result = true
-        let fm = NSFileManager.defaultManager()
-        if !fm.fileExistsAtPath(path) {
+        let fm = FileManager.default
+        if !fm.fileExists(atPath: path) {
             var error: NSError?
             do {
-                try fm.createDirectoryAtPath(path, withIntermediateDirectories: false, attributes: nil)
+                try fm.createDirectory(atPath: path, withIntermediateDirectories: false, attributes: nil)
                 result = true
             } catch let error1 as NSError {
                 error = error1
@@ -189,13 +189,13 @@ public class LKMediaManager: NSObject {
         return result;
     }
     
-    func removeFile(filePath:String) -> Bool {
+    func removeFile(_ filePath:String) -> Bool {
         var result = true
-        let fm = NSFileManager.defaultManager()
-        if fm.fileExistsAtPath(filePath) {
+        let fm = FileManager.default
+        if fm.fileExists(atPath: filePath) {
             var error: NSError?
             do {
-                try fm.removeItemAtPath(filePath)
+                try fm.removeItem(atPath: filePath)
                 result = true
             } catch let error1 as NSError {
                 error = error1
@@ -209,28 +209,29 @@ public class LKMediaManager: NSObject {
     }
     
     func setup() {
-        createDirectory(mediaPath)
+        _ = createDirectory(mediaPath)
     }
     
-    func convertImageToData(image:UIImage, metadata:Dictionary<String,String>, quality:CGFloat) -> NSData {
+    func convertImageToData(_ image:UIImage, metadata:Dictionary<String,String>, quality:CGFloat) -> Data {
         let imageData = NSMutableData()
-        let dest = CGImageDestinationCreateWithData(imageData as CFMutableDataRef, kUTTypeJPEG, 1, nil)
+        let dest = CGImageDestinationCreateWithData(imageData as CFMutableData, kUTTypeJPEG, 1, nil)
 
-        CGImageDestinationSetProperties(dest!, [kCGImageDestinationLossyCompressionQuality as String:quality])
+        let properties = [kCGImageDestinationLossyCompressionQuality as String:quality]
+        CGImageDestinationSetProperties(dest!, properties as CFDictionary)
     
-        CGImageDestinationAddImage(dest!, image.CGImage!, metadata as CFDictionaryRef);
+        CGImageDestinationAddImage(dest!, image.cgImage!, metadata as CFDictionary);
         CGImageDestinationFinalize(dest!);
         
-        return imageData
+        return imageData as Data
     }
     
-    func adjustOrientationImage(image:UIImage, toWidth:CGFloat) -> UIImage {
+    func adjustOrientationImage(_ image:UIImage, toWidth:CGFloat) -> UIImage {
 
-        let imageRef = image.CGImage
-        let width = CGFloat(CGImageGetWidth(imageRef))
-        let height = CGFloat(CGImageGetHeight(imageRef))
+        let imageRef = image.cgImage
+        let width = CGFloat((imageRef?.width)!)
+        let height = CGFloat((imageRef?.height)!)
         
-        var bounds = CGRectMake(0, 0, width, height)
+        var bounds = CGRect(x: 0, y: 0, width: width, height: height)
         
         if toWidth > 0.0 {
             if bounds.size.width > toWidth || bounds.size.height > toWidth {
@@ -251,56 +252,56 @@ public class LKMediaManager: NSObject {
         var tmp:CGFloat
         
         switch (image.imageOrientation) {
-        case .Up:              // EXIF: 1
-            transform = CGAffineTransformIdentity
+        case .up:              // EXIF: 1
+            transform = CGAffineTransform.identity
             break;
             
-        case .UpMirrored:      // EXIF: 2
-            transform = CGAffineTransformMakeTranslation(width, 0.0)
-            transform = CGAffineTransformScale(transform, -1.0, 1.0)
+        case .upMirrored:      // EXIF: 2
+            transform = CGAffineTransform(translationX: width, y: 0.0)
+            transform = transform.scaledBy(x: -1.0, y: 1.0)
             break
             
-        case .Down:            // EXIF: 3
-            transform = CGAffineTransformMakeTranslation(width, height)
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI))
+        case .down:            // EXIF: 3
+            transform = CGAffineTransform(translationX: width, y: height)
+            transform = transform.rotated(by: CGFloat(M_PI))
             break
             
-        case .DownMirrored:    // EXIF: 4
-            transform = CGAffineTransformMakeTranslation(0.0, height)
-            transform = CGAffineTransformScale(transform, 1.0, -1.0)
+        case .downMirrored:    // EXIF: 4
+            transform = CGAffineTransform(translationX: 0.0, y: height)
+            transform = transform.scaledBy(x: 1.0, y: -1.0)
             break
             
-        case .LeftMirrored:    // EXIF: 5
+        case .leftMirrored:    // EXIF: 5
             tmp = bounds.size.height
             bounds.size.height = bounds.size.width
             bounds.size.width = tmp
-            transform = CGAffineTransformMakeTranslation(height, width)
-            transform = CGAffineTransformScale(transform, -1.0, 1.0)
-            transform = CGAffineTransformRotate(transform, 3.0 * CGFloat(M_PI) / 2.0)
+            transform = CGAffineTransform(translationX: height, y: width)
+            transform = transform.scaledBy(x: -1.0, y: 1.0)
+            transform = transform.rotated(by: 3.0 * CGFloat(M_PI) / 2.0)
             break
             
-        case .Left:            // EXIF: 6
+        case .left:            // EXIF: 6
             tmp = bounds.size.height
             bounds.size.height = bounds.size.width
             bounds.size.width = tmp
-            transform = CGAffineTransformMakeTranslation(0, width)
-            transform = CGAffineTransformRotate(transform, 3.0 * CGFloat(M_PI) / 2.0)
+            transform = CGAffineTransform(translationX: 0, y: width)
+            transform = transform.rotated(by: 3.0 * CGFloat(M_PI) / 2.0)
             break
             
-        case .RightMirrored:   // EXIF: 7
+        case .rightMirrored:   // EXIF: 7
             tmp = bounds.size.height
             bounds.size.height = bounds.size.width
             bounds.size.width = tmp
-            transform = CGAffineTransformMakeScale(-1.0, 1.0)
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI) / 2.0)
+            transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+            transform = transform.rotated(by: CGFloat(M_PI) / 2.0)
             break
             
-        case .Right:           // EXIF: 8
+        case .right:           // EXIF: 8
             tmp = bounds.size.height;
             bounds.size.height = bounds.size.width
             bounds.size.width = tmp
-            transform = CGAffineTransformMakeTranslation(height, 0)
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI) / 2.0)
+            transform = CGAffineTransform(translationX: height, y: 0)
+            transform = transform.rotated(by: CGFloat(M_PI) / 2.0)
             break
             
         }
@@ -308,21 +309,21 @@ public class LKMediaManager: NSObject {
         UIGraphicsBeginImageContext(bounds.size)
         let context = UIGraphicsGetCurrentContext()
         
-        if image.imageOrientation == .Right || image.imageOrientation == .Left {
-                CGContextScaleCTM(context, -scale, scale)
-                CGContextTranslateCTM(context, -height, 0)
+        if image.imageOrientation == .right || image.imageOrientation == .left {
+                context?.scaleBy(x: -scale, y: scale)
+                context?.translateBy(x: -height, y: 0)
         } else {
-            CGContextScaleCTM(context, scale, -scale)
-            CGContextTranslateCTM(context, 0, -height)
+            context?.scaleBy(x: scale, y: -scale)
+            context?.translateBy(x: 0, y: -height)
         }
         
-        CGContextConcatCTM(context, transform)
+        context?.concatenate(transform)
         
-        CGContextDrawImage(context, CGRectMake(0, 0, width, height), image.CGImage);
+        context?.draw(image.cgImage!, in: CGRect(x: 0, y: 0, width: width, height: height));
         let resultImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return resultImage
+        return resultImage!
     }
 
 }
