@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24CC699B8759F2509ECAA875 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0983F284DCFCAD44DC017B20 /* Pods_Tests.framework */; };
+		3625302F434903C4B6E953F6 /* Pods_LKMediaManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20062581C467ECC3E29FAE13 /* Pods_LKMediaManager.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -22,8 +24,6 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		808DCF65F7DC82B861A996BA /* Pods_LKMediaManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F41C9B50C7D3DB364F17A52 /* Pods_LKMediaManager.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		983187FB0D15AB768D968429 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A158A4C33704BF2FE7662F9 /* Pods_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		BC378E521B0AE498009414FC /* LKMediaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC378E511B0AE498009414FC /* LKMediaManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,10 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1A158A4C33704BF2FE7662F9 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2F41C9B50C7D3DB364F17A52 /* Pods_LKMediaManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LKMediaManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		405EE6CF081DFE0FCA8863F7 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		0983F284DCFCAD44DC017B20 /* Pods_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		20062581C467ECC3E29FAE13 /* Pods_LKMediaManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LKMediaManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		489D199E21735C7EE104D266 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		4BAAD40F5965045FFBD24F5F /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* LKMediaManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LKMediaManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -65,11 +65,11 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		70B306CC7745746AFC3B7387 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		7F31F0B95116F61335FCE06D /* LKMediaManager.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LKMediaManager.podspec; path = ../LKMediaManager.podspec; sourceTree = "<group>"; };
-		92732E724C594E2D07E327DB /* Pods-LKMediaManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LKMediaManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-LKMediaManager/Pods-LKMediaManager.release.xcconfig"; sourceTree = "<group>"; };
-		B88D17322D9216EE3DF77B09 /* Pods-LKMediaManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LKMediaManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LKMediaManager/Pods-LKMediaManager.debug.xcconfig"; sourceTree = "<group>"; };
+		9C9724C517E6474AC199ECEB /* Pods-LKMediaManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LKMediaManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LKMediaManager/Pods-LKMediaManager.debug.xcconfig"; sourceTree = "<group>"; };
 		BC378E501B0AE497009414FC /* LKMediaManager-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LKMediaManager-Bridging-Header.h"; sourceTree = "<group>"; };
 		BC378E511B0AE498009414FC /* LKMediaManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LKMediaManager.swift; sourceTree = "<group>"; };
-		C9332286A1CA53BE0A9568AB /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
+		F628E9847F118D6782D2BD34 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		F9BDF0C55AD092A6AA07DA4C /* Pods-LKMediaManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LKMediaManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-LKMediaManager/Pods-LKMediaManager.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +80,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				808DCF65F7DC82B861A996BA /* Pods_LKMediaManager.framework in Frameworks */,
+				3625302F434903C4B6E953F6 /* Pods_LKMediaManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,13 +91,24 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				983187FB0D15AB768D968429 /* Pods_Tests.framework in Frameworks */,
+				24CC699B8759F2509ECAA875 /* Pods_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42D3694A68112C58E4C7B1FD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9C9724C517E6474AC199ECEB /* Pods-LKMediaManager.debug.xcconfig */,
+				F9BDF0C55AD092A6AA07DA4C /* Pods-LKMediaManager.release.xcconfig */,
+				F628E9847F118D6782D2BD34 /* Pods-Tests.debug.xcconfig */,
+				4BAAD40F5965045FFBD24F5F /* Pods-Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
@@ -107,7 +118,7 @@
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				B16A81439430E45BFE4392F6 /* Pods */,
+				42D3694A68112C58E4C7B1FD /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,8 +138,8 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				2F41C9B50C7D3DB364F17A52 /* Pods_LKMediaManager.framework */,
-				1A158A4C33704BF2FE7662F9 /* Pods_Tests.framework */,
+				20062581C467ECC3E29FAE13 /* Pods_LKMediaManager.framework */,
+				0983F284DCFCAD44DC017B20 /* Pods_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -188,17 +199,6 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		B16A81439430E45BFE4392F6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B88D17322D9216EE3DF77B09 /* Pods-LKMediaManager.debug.xcconfig */,
-				92732E724C594E2D07E327DB /* Pods-LKMediaManager.release.xcconfig */,
-				405EE6CF081DFE0FCA8863F7 /* Pods-Tests.debug.xcconfig */,
-				C9332286A1CA53BE0A9568AB /* Pods-Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		BC378E4E1B0AE448009414FC /* Pod */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,12 +224,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "LKMediaManager" */;
 			buildPhases = (
-				DBEC28FEC56A44F3AD48EEC9 /* Check Pods Manifest.lock */,
+				4A50AD90EFC5E46DED411067 /* [CP] Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				B4E59109F46641D61B064EDB /* Copy Pods Resources */,
-				2585569BBE693602E02BAC3A /* Embed Pods Frameworks */,
+				4361727F88FC66A141F7414A /* [CP] Embed Pods Frameworks */,
+				F182620E216C518A736AA1A1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -244,12 +244,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "Tests" */;
 			buildPhases = (
-				D6E161FBAF7737B958E9DDDA /* Check Pods Manifest.lock */,
+				2BB567EDFF8FB9226AD2846F /* [CP] Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				9C8516A9F622630B9F55E525 /* Copy Pods Resources */,
-				4B592C2800C78B74A0C6D45A /* Embed Pods Frameworks */,
+				DED3A73BBAE00A79CE0DB42C /* [CP] Embed Pods Frameworks */,
+				F8F036C0D9D6B17D2A30D2F3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -274,6 +274,7 @@
 				ORGANIZATIONNAME = "Hiroshi Hashiguchi";
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
+						DevelopmentTeam = EDF37AMEEW;
 						LastSwiftMigration = 0800;
 					};
 					6003F5AD195388D20070C39A = {
@@ -323,14 +324,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2585569BBE693602E02BAC3A /* Embed Pods Frameworks */ = {
+		2BB567EDFF8FB9226AD2846F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4361727F88FC66A141F7414A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,14 +354,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LKMediaManager/Pods-LKMediaManager-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4B592C2800C78B74A0C6D45A /* Embed Pods Frameworks */ = {
+		4A50AD90EFC5E46DED411067 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DED3A73BBAE00A79CE0DB42C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,29 +384,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9C8516A9F622630B9F55E525 /* Copy Pods Resources */ = {
+		F182620E216C518A736AA1A1 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B4E59109F46641D61B064EDB /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -383,34 +399,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LKMediaManager/Pods-LKMediaManager-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D6E161FBAF7737B958E9DDDA /* Check Pods Manifest.lock */ = {
+		F8F036C0D9D6B17D2A30D2F3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		DBEC28FEC56A44F3AD48EEC9 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tests/Pods-Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -519,9 +520,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -557,9 +559,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -567,15 +570,16 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B88D17322D9216EE3DF77B09 /* Pods-LKMediaManager.debug.xcconfig */;
+			baseConfigurationReference = 9C9724C517E6474AC199ECEB /* Pods-LKMediaManager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = EDF37AMEEW;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LKMediaManager/LKMediaManager-Prefix.pch";
 				INFOPLIST_FILE = "LKMediaManager/LKMediaManager-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -588,15 +592,16 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92732E724C594E2D07E327DB /* Pods-LKMediaManager.release.xcconfig */;
+			baseConfigurationReference = F9BDF0C55AD092A6AA07DA4C /* Pods-LKMediaManager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = EDF37AMEEW;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LKMediaManager/LKMediaManager-Prefix.pch";
 				INFOPLIST_FILE = "LKMediaManager/LKMediaManager-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -608,7 +613,7 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 405EE6CF081DFE0FCA8863F7 /* Pods-Tests.debug.xcconfig */;
+			baseConfigurationReference = F628E9847F118D6782D2BD34 /* Pods-Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LKMediaManager.app/LKMediaManager";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -632,7 +637,7 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C9332286A1CA53BE0A9568AB /* Pods-Tests.release.xcconfig */;
+			baseConfigurationReference = 4BAAD40F5965045FFBD24F5F /* Pods-Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LKMediaManager.app/LKMediaManager";
 				FRAMEWORK_SEARCH_PATHS = (
