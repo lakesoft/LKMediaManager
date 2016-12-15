@@ -141,14 +141,14 @@ open class LKMediaManager: NSObject {
         }
     }
     
-    open func videoThumbnail(_ url:URL, width:CGFloat) -> UIImage? {
+    open func videoThumbnail(_ url:URL, width:CGFloat, sec: Float64 = 0.0) -> UIImage? {
         // gen thumbnail
         // http://stackoverflow.com/questions/5719135/uiimagepickercontroller-thumbnail-of-video-which-is-pick-up-from-library
 
         let asset = AVURLAsset(url: url, options: nil)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         imageGenerator.appliesPreferredTrackTransform = true
-        let time = CMTimeMakeWithSeconds(0.0, 600)
+        let time = CMTimeMakeWithSeconds(sec, Int32(NSEC_PER_SEC))
         var error: NSError?
         var actualTime:CMTime = CMTimeMake(0, 0)
         
