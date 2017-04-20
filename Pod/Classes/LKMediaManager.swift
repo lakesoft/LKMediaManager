@@ -263,7 +263,7 @@ open class LKMediaManager: NSObject {
             
         case .down:            // EXIF: 3
             transform = CGAffineTransform(translationX: width, y: height)
-            transform = transform.rotated(by: CGFloat(M_PI))
+            transform = transform.rotated(by: CGFloat.pi)
             break
             
         case .downMirrored:    // EXIF: 4
@@ -277,7 +277,7 @@ open class LKMediaManager: NSObject {
             bounds.size.width = tmp
             transform = CGAffineTransform(translationX: height, y: width)
             transform = transform.scaledBy(x: -1.0, y: 1.0)
-            transform = transform.rotated(by: 3.0 * CGFloat(M_PI) / 2.0)
+            transform = transform.rotated(by: 3.0 * CGFloat.pi / 2.0)
             break
             
         case .left:            // EXIF: 6
@@ -285,7 +285,7 @@ open class LKMediaManager: NSObject {
             bounds.size.height = bounds.size.width
             bounds.size.width = tmp
             transform = CGAffineTransform(translationX: 0, y: width)
-            transform = transform.rotated(by: 3.0 * CGFloat(M_PI) / 2.0)
+            transform = transform.rotated(by: 3.0 * CGFloat.pi / 2.0)
             break
             
         case .rightMirrored:   // EXIF: 7
@@ -293,7 +293,7 @@ open class LKMediaManager: NSObject {
             bounds.size.height = bounds.size.width
             bounds.size.width = tmp
             transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
-            transform = transform.rotated(by: CGFloat(M_PI) / 2.0)
+            transform = transform.rotated(by: CGFloat.pi / 2.0)
             break
             
         case .right:           // EXIF: 8
@@ -301,7 +301,7 @@ open class LKMediaManager: NSObject {
             bounds.size.height = bounds.size.width
             bounds.size.width = tmp
             transform = CGAffineTransform(translationX: height, y: 0)
-            transform = transform.rotated(by: CGFloat(M_PI) / 2.0)
+            transform = transform.rotated(by: CGFloat.pi / 2.0)
             break
             
         }
