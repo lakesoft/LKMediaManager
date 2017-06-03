@@ -103,9 +103,9 @@ open class LKMediaManager: NSObject {
         return nil
     }
     
-    open func saveImage(_ image:UIImage, metadata:Dictionary<String,String>, quality:CGFloat, filename:String) -> Bool {
+    open func saveImageAsJpeg(_ image:UIImage, metadata:Dictionary<String,String>, quality:CGFloat, filename:String) -> Bool {
         let filePath = mediaPath.stringByAppendingPathComponent(filename)
-        let data = convertImageToData(image, metadata: metadata, quality: quality)
+        let data = convertImageToDataAsJpeg(image, metadata: metadata, quality: quality)
         if (try? data.write(to: URL(fileURLWithPath: filePath), options: [.atomic])) != nil {
             return true
         } else {
@@ -113,6 +113,18 @@ open class LKMediaManager: NSObject {
             return false
         }
     }
+    
+    open func saveImageAsPng(_ image:UIImage, metadata:Dictionary<String,String>, filename:String) -> Bool {
+        let filePath = mediaPath.stringByAppendingPathComponent(filename)
+        let data = convertImageToDataAsPng(image, metadata: metadata)
+        if (try? data.write(to: URL(fileURLWithPath: filePath), options: [.atomic])) != nil {
+            return true
+        } else {
+            NSLog("failed to save: %@", filename)
+            return false
+        }
+    }
+
     
     // MARK: -  API (Media/Video)
     open func saveVideo(_ url:URL, filename:String) -> Bool {
@@ -212,13 +224,23 @@ open class LKMediaManager: NSObject {
         _ = createDirectory(mediaPath)
     }
     
-    func convertImageToData(_ image:UIImage, metadata:Dictionary<String,String>, quality:CGFloat) -> Data {
+    func convertImageToDataAsJpeg(_ image:UIImage, metadata:Dictionary<String,String>, quality:CGFloat) -> Data {
         let imageData = NSMutableData()
         let dest = CGImageDestinationCreateWithData(imageData as CFMutableData, kUTTypeJPEG, 1, nil)
 
         let properties = [kCGImageDestinationLossyCompressionQuality as String:quality]
         CGImageDestinationSetProperties(dest!, properties as CFDictionary)
     
+        CGImageDestinationAddImage(dest!, image.cgImage!, metadata as CFDictionary);
+        CGImageDestinationFinalize(dest!);
+        
+        return imageData as Data
+    }
+    
+    func convertImageToDataAsPng(_ image:UIImage, metadata:Dictionary<String,String>) -> Data {
+        let imageData = NSMutableData()
+        let dest = CGImageDestinationCreateWithData(imageData as CFMutableData, kUTTypePNG, 1, nil)
+        
         CGImageDestinationAddImage(dest!, image.cgImage!, metadata as CFDictionary);
         CGImageDestinationFinalize(dest!);
         
