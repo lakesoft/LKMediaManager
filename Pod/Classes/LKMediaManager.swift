@@ -11,6 +11,7 @@ import AssetsLibrary
 import AVFoundation
 import MobileCoreServices
 import ImageIO
+import CoreMedia
 
 extension String {
     func stringByAppendingPathComponent(_ path: String) -> String {
@@ -32,7 +33,7 @@ open class LKMediaManager: NSObject {
         case MOV = "video/quicktime"
     }
     
-    open static let sharedManager = LKMediaManager()
+    public static let sharedManager = LKMediaManager()
     
     override init() {
         super.init()
@@ -160,9 +161,9 @@ open class LKMediaManager: NSObject {
         let asset = AVURLAsset(url: url, options: nil)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         imageGenerator.appliesPreferredTrackTransform = true
-        let time = CMTimeMakeWithSeconds(sec, Int32(NSEC_PER_SEC))
+        let time = CMTimeMakeWithSeconds(sec, preferredTimescale: Int32(NSEC_PER_SEC))
         var error: NSError?
-        var actualTime:CMTime = CMTimeMake(0, 0)
+        var actualTime:CMTime = CMTimeMake(value: 0, timescale: 0)
         
         let imageRef: CGImage!
         do {

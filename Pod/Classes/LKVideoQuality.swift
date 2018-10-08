@@ -11,46 +11,46 @@ import UIKit
 open class LKVideoQuality: NSObject {
        
     public struct Quality {
-        let type: UIImagePickerControllerQualityType
+        let type: UIImagePickerController.QualityType
         let localizedStringKey: String
         
-        init(type: UIImagePickerControllerQualityType,localizedStringKey: String) {
+        init(type: UIImagePickerController.QualityType,localizedStringKey: String) {
             self.type = type
             self.localizedStringKey = localizedStringKey
         }
     }
     
-    open static let list = [
-        Quality(type:UIImagePickerControllerQualityType.typeHigh, localizedStringKey:"VideoQuality.High"),
-        Quality(type:UIImagePickerControllerQualityType.typeMedium, localizedStringKey:"VideoQuality.Medium"),
-        Quality(type:UIImagePickerControllerQualityType.typeLow, localizedStringKey:"VideoQuality.Low"),
-        Quality(type:UIImagePickerControllerQualityType.type640x480, localizedStringKey:"VideoQuality.640x480"),
-        Quality(type:UIImagePickerControllerQualityType.typeIFrame960x540, localizedStringKey:"VideoQuality.IFrame960x540"),
-        Quality(type:UIImagePickerControllerQualityType.typeIFrame1280x720, localizedStringKey:"VideoQuality.IFrame1280x720"),
+    public static let list = [
+        Quality(type:UIImagePickerController.QualityType.typeHigh, localizedStringKey:"VideoQuality.High"),
+        Quality(type:UIImagePickerController.QualityType.typeMedium, localizedStringKey:"VideoQuality.Medium"),
+        Quality(type:UIImagePickerController.QualityType.typeLow, localizedStringKey:"VideoQuality.Low"),
+        Quality(type:UIImagePickerController.QualityType.type640x480, localizedStringKey:"VideoQuality.640x480"),
+        Quality(type:UIImagePickerController.QualityType.typeIFrame960x540, localizedStringKey:"VideoQuality.IFrame960x540"),
+        Quality(type:UIImagePickerController.QualityType.typeIFrame1280x720, localizedStringKey:"VideoQuality.IFrame1280x720"),
     ]
     
     static let bundle = Bundle(path:Bundle(for: LKVideoQuality.self).path(forResource: "LKMediaManager", ofType: "bundle")!)!
 
-    open static let DefaultQualityType = UIImagePickerControllerQualityType.type640x480
+    public static let DefaultQualityType = UIImagePickerController.QualityType.type640x480
     
-    open static var title:String {
+    public static var title:String {
         return NSLocalizedString("VideoQuality.title", bundle:bundle, comment: "")
     }
     
-    open static var typeNames:[String] {
+    public static var typeNames:[String] {
         return list.map { (q:Quality) -> String in
             return NSLocalizedString(q.localizedStringKey, bundle:self.bundle, comment: "")
         }
     }
     
-    open static func typeName(_ index:Int) -> String? {
+    public static func typeName(_ index:Int) -> String? {
         if index < list.count {
             return NSLocalizedString(list[index].localizedStringKey, bundle:bundle, comment: "")
         }
         return nil
     }
 
-    open static func index(_ qualityType:UIImagePickerControllerQualityType) -> Int? {
+    public static func index(_ qualityType:UIImagePickerController.QualityType) -> Int? {
         for (index, quality) in list.enumerated() {
             if quality.type == qualityType {
                 return index
@@ -59,28 +59,28 @@ open class LKVideoQuality: NSObject {
         return nil
     }
     
-    open static func qualityType(_ index:Int) -> UIImagePickerControllerQualityType? {
+    public static func qualityType(_ index:Int) -> UIImagePickerController.QualityType? {
         if index < list.count {
             return list[index].type
         }
         return nil
     }
     
-    open static let userDefaultsKey = "LKVideoQuality.qualityType"
-    open static func defaultQualityType() -> UIImagePickerControllerQualityType {
+    public static let userDefaultsKey = "LKVideoQuality.qualityType"
+    public static func defaultQualityType() -> UIImagePickerController.QualityType {
         if let value = UserDefaults.standard.object(forKey: userDefaultsKey) as?Int {
-            if let qualityType = UIImagePickerControllerQualityType(rawValue: value) {
+            if let qualityType = UIImagePickerController.QualityType(rawValue: value) {
                 return qualityType
             }
         }
         return DefaultQualityType
     }
-    open static func saveDefaultQualityType(_ qualityType:UIImagePickerControllerQualityType) {
+    public static func saveDefaultQualityType(_ qualityType:UIImagePickerController.QualityType) {
         UserDefaults.standard.set(qualityType.rawValue, forKey: userDefaultsKey)
         UserDefaults.standard.synchronize()
     }
 
-    open static func defaultIndex() -> Int {
+    public static func defaultIndex() -> Int {
         if let index = index(defaultQualityType()) {
             return index
         }
@@ -90,14 +90,14 @@ open class LKVideoQuality: NSObject {
         return 0
     }
     
-    open static func defaultTypeName() -> String {
+    public static func defaultTypeName() -> String {
         if let typeName = typeName(defaultIndex()) {
             return typeName
         }
         return ""
     }
     
-    open static func saveIndex(_ index:Int) {
+    public static func saveIndex(_ index:Int) {
         if let qualityType = qualityType(index) {
             saveDefaultQualityType(qualityType)
         }
